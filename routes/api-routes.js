@@ -1,10 +1,9 @@
-const router = require("express").Router();
-const Workout = require("../models/Workouts.js");
+const db = require('../models');
 
 
 module.exports = function(app) {
-    app.get("/api/workouts", (req, res) => {
-        Workout.find({}).limit(1)
+    app.get("/api/lastworkout", (req, res) => {
+        db.Workout.find({}).limit(1)
         .sort({ date: -1 })
         .then(dbTransaction => {
           res.json(dbTransaction);
@@ -13,5 +12,4 @@ module.exports = function(app) {
           res.status(400).json(err);
         });
     });
-
-}
+};
