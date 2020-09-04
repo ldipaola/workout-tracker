@@ -1,11 +1,10 @@
-const db = require('../models');
-const { Workout } = require('../models');
+const router = require("express").Router();
+const Workout = require('../models/workout.js');
 const ObjectId = require('mongodb').ObjectId; 
 
 
-module.exports = function(app) {
-    app.get("/api/workouts", (req, res) => {
-        db.Workout.find({})
+    router.get("/api/workouts", (req, res) => {
+        Workout.find({})
         .then(dbWorkout => {
           res.json(dbWorkout);
         })
@@ -14,12 +13,10 @@ module.exports = function(app) {
         });
     });
 
-    app.put("/api/workouts/:id", (req, res) => {
+    router.put("/api/workouts/:id", (req, res) => {
        const exercise = req.body;
        console.log(exercise);
-       let id = req.params.id;
-       console.log(id);
-        db.Workout.update({_id: ObjectId(id)},{$push: {exercises: exercise}}, (err, data) => {
+        Workout.updateOne({_id: ObjectId(req.params.id)},{$push: {exercises: exercise}}, (err, data) => {
             if (err) {
               console.log(err);
             } else {
@@ -28,9 +25,9 @@ module.exports = function(app) {
           });
     })
 
-    app.post("/api/workouts", ({ body }, res) => {
+    router.post("/api/workouts", ({ body }, res) => {
         const workout = new Workout(body);
-        db.Workout.create(workout)
+        Workout.create(workout)
           .then(dbWorkout => {
             res.json(dbWorkout);
           })
@@ -39,8 +36,8 @@ module.exports = function(app) {
           });
       });
 
-    app.get("/api/workouts/range", () => {
-      db.Workout.find({})
+    router.get("/api/workouts/range", () => {
+       Workout.find({})
         .then(dbWorkout => {
           res.json(dbWorkout);
         })
@@ -48,4 +45,5 @@ module.exports = function(app) {
           res.status(400).json(err);
         });
     });
-};
+
+module.exports = router;
