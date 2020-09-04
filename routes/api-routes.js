@@ -36,7 +36,7 @@ const ObjectId = require('mongodb').ObjectId;
           });
       });
 
-    router.get("/api/workouts/range", () => {
+    router.get("/api/workouts/range", (req, res) => {
        Workout.find({})
         .then(dbWorkout => {
           res.json(dbWorkout);
