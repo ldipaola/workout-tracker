@@ -12,7 +12,8 @@
   [License](#License)  
   [Contributing](#Contributing)  
   [Tests](#Tests)  
-  [Deployed](#Deployed) 
+  [Deployed](#Deployed)
+  [Demo](#Demo) 
   [Questions](#Questions) 
    
 
@@ -32,6 +33,10 @@
 
   ## Deployed
   https://workout-tracker-ldp.herokuapp.com/
+
+  ## Demo
+
+  ![Project demo](demo/demo.png)
 
   ## Questions
   Github: ldipaola
